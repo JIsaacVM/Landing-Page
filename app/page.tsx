@@ -1,9 +1,9 @@
-import Card from "@/components/Card";
+
 import ContactFlipCard from "@/components/ContactFlipCard";
 import Intro from "@/components/Intro";
 import MarqueeDemo from "@/components/MarqueeDemo";
 import PaperNews from "@/components/PaperNews";
-import Ubication from "@/components/Ubication";
+
 
 export default function Home() {
   return (
