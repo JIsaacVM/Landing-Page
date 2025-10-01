@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
-import "./globals.css";
+import "../globals.css";
+import { Navbar } from "./components/Navbar";
+import { RetroGrid } from "./components/ui/retro-grid";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -29,7 +31,16 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased bg-black`}
       >
-        <main className="flex-grow">{children}</main>
+
+        <div className="fixed inset-0 overflow-x-hidden z-[-10] bg-gradient-to-b from-black to-transparent">
+          <RetroGrid />
+        </div>
+
+
+        <div className="relative z-10 flex flex-col min-h-screen">
+          <Navbar />
+          <main className="flex-grow">{children}</main>
+        </div>
 
       </body>
     </html>

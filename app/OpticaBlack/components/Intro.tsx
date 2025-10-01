@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { ShineBorder } from "@/components/ui/shine-border";
+import { ShineBorder } from "../components/ui/shine-border";
 
 export default function Intro() {
     return (

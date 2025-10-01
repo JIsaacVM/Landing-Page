@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import { useState, useCallback } from "react";
-import { ShineBorder } from "@/components/ui/shine-border";
+import { ShineBorder } from "../components/ui/shine-border";
 import { Instagram, Facebook, Mail, MapPin, Repeat } from "lucide-react";
 
 const contactInfo = {
