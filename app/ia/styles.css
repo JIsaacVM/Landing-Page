@@ -1,0 +1,265 @@
+/* --- VARIABLES Y ESTILOS GLOBALES --- */
+:root {
+    --background-color: #0a0a0a;
+    --text-color: #e5e5e5;
+    --primary-color: #3b82f6;
+    --primary-color-translucent-heavy: rgba(59, 130, 246, 0.6);
+    --primary-color-translucent-medium: rgba(59, 130, 246, 0.4);
+    --primary-color-translucent-light: rgba(59, 130, 246, 0.2);
+    --chat-bubble-bg: #1f2937;
+    --tickle-animation-duration: 0.5s;
+}
+
+/* Reset box-sizing for predictable element sizing */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+.font-playfair {
+    font-family: 'Playfair Display', serif;
+}
+
+.font-roboto {
+    font-family: 'Roboto', sans-serif;
+}
+
+.font-mono {
+    font-family: 'Space Mono', monospace;
+}
+
+body {
+    background-color: var(--background-color);
+    color: var(--text-color);
+    overflow-x: hidden;
+}
+
+/* --- SECCIONES PRINCIPALES --- */
+#hero {
+    height: 150vh;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding-top: 30vh;
+}
+
+.hero-text-container {
+    transition: opacity 0.3s ease-out;
+    opacity: 1;
+}
+
+#chat-section {
+    min-height: 100vh;
+    padding-top: 50px;
+    opacity: 0;
+    transition: opacity 0.8s ease-in-out;
+}
+
+body.chat-active #chat-section {
+    opacity: 1;
+}
+
+
+/* --- ORBE INTERACTIVO --- */
+#character-orb {
+    position: fixed;
+    transform: translate(-50%, -50%);
+    background: linear-gradient(to bottom, var(--primary-color), #000000);
+    border-radius: 50%;
+    z-index: 10;
+    box-shadow: 0 0 20px var(--primary-color-translucent-medium), 0 0 40px var(--primary-color-translucent-light);
+    animation: pulse 4s infinite ease-in-out 1.5s;
+    cursor: pointer;
+    outline: none;
+    will-change: width, height, top, left;
+}
+
+#character-orb:focus-visible {
+    box-shadow: 0 0 0 4px var(--background-color), 0 0 0 6px var(--primary-color);
+}
+
+/* Fallback for browsers that don't support :focus-visible to ensure keyboard users see focus */
+#character-orb:focus {
+    box-shadow: 0 0 0 4px var(--background-color), 0 0 0 6px var(--primary-color);
+}
+
+.eye {
+    position: absolute;
+    width: 50px;
+    height: 75px;
+    background-color: black;
+    border-radius: 50%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    transition: transform 0.1s ease-out;
+    will-change: transform;
+}
+
+#eye-left {
+    margin-left: -40px;
+}
+
+#eye-right {
+    margin-left: 40px;
+}
+
+/* --- BURBUJAS DE CHAT --- */
+.chat-bubble {
+    background-color: var(--chat-bubble-bg);
+    padding: 1rem;
+    border-radius: 1.5rem;
+    max-width: 70%;
+    margin-bottom: 1.5rem;
+    animation: bubble-pop 400ms cubic-bezier(.175, .885, .32, 1.275) forwards;
+}
+
+.bubble-left {
+    align-self: flex-start;
+    border-bottom-left-radius: 0.5rem;
+}
+
+.bubble-right {
+    align-self: flex-end;
+    background-color: var(--primary-color);
+    border-bottom-right-radius: 0.5rem;
+}
+
+/* --- ANIMACIONES --- */
+@keyframes bubble-pop {
+    from {
+        transform: translateY(10px) scale(0.98);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateY(0) scale(1);
+        opacity: 1;
+    }
+}
+
+@keyframes pulse {
+
+    0%,
+    100% {
+        box-shadow: 0 0 20px var(--primary-color-translucent-medium), 0 0 40px var(--primary-color-translucent-light), 0 0 60px rgba(59, 130, 246, 0.1);
+    }
+
+    50% {
+        box-shadow: 0 0 30px var(--primary-color-translucent-heavy), 0 0 60px var(--primary-color-translucent-medium), 0 0 90px var(--primary-color-translucent-light);
+    }
+}
+
+.tickle {
+    animation: tickle-animation var(--tickle-animation-duration) ease-in-out;
+}
+
+@keyframes tickle-animation {
+
+    0%,
+    100% {
+        transform: translate(-50%, -50%) rotate(0deg);
+    }
+
+    10% {
+        transform: translate(-53%, -47%) rotate(-10deg);
+    }
+
+    20% {
+        transform: translate(-47%, -53%) rotate(10deg);
+    }
+
+    30% {
+        transform: translate(-52%, -48%) rotate(-8deg);
+    }
+
+    40% {
+        transform: translate(-48%, -52%) rotate(8deg);
+    }
+
+    50% {
+        transform: translate(-51%, -49%) rotate(-6deg);
+    }
+
+    60% {
+        transform: translate(-49%, -51%) rotate(6deg);
+    }
+
+    70% {
+        transform: translate(-50.5%, -49.5%) rotate(-2deg);
+    }
+
+    80% {
+        transform: translate(-49.5%, -50.5%) rotate(2deg);
+    }
+
+    90% {
+        transform: translate(-50%, -50%) rotate(0deg);
+    }
+}
+
+.laugh .eye {
+    animation: laugh-eye-animation var(--tickle-animation-duration) ease-in-out forwards;
+}
+
+@keyframes laugh-eye-animation {
+
+    0%,
+    100% {
+        height: 75px;
+        transform-origin: center;
+        transform: translate(-50%, -50%) scaleY(1);
+    }
+
+    10%,
+    30%,
+    50%,
+    70% {
+        height: 75px;
+        transform-origin: center;
+        transform: translate(-50%, -50%) scaleY(0.5);
+    }
+
+    20% {
+        height: 75px;
+        transform-origin: center;
+        transform: translate(-50%, -50%) scaleY(0.5) translateY(-8px);
+    }
+
+    40% {
+        height: 75px;
+        transform-origin: center;
+        transform: translate(-50%, -50%) scaleY(0.5) translateY(8px);
+    }
+
+    60% {
+        height: 75px;
+        transform-origin: center;
+        transform: translate(-50%, -50%) scaleY(0.5) translateY(-5px);
+    }
+
+    80% {
+        height: 75px;
+        transform-origin: center;
+        transform: translate(-50%, -50%) scaleY(0.5) translateY(5px);
+    }
+
+    90% {
+        height: 75px;
+        transform-origin: center;
+        transform: translate(-50%, -50%) scaleY(1);
+    }
+}
+
+#hero #character-orb {
+    position: relative !important;
+    left: auto !important;
+    top: auto !important;
+    transform: none !important;
+    margin: 0 auto;
+    display: inline-block;
+    width: var(--orb-size-initial, 300px) !important;
+    height: var(--orb-size-initial, 300px) !important;
+}

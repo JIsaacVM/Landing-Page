@@ -1,10 +1,16 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono, Special_Elite } from "next/font/google";
+import { Geist, Geist_Mono, Special_Elite, Rye } from "next/font/google";
 import "./globals.css";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
+});
+
+const rye = Rye({
+  variable: "--font-rye",
+  subsets: ["latin"],
+  weight: "400",
 });
 
 const specialElite = Special_Elite({
@@ -33,7 +39,7 @@ export default function RootLayout({
   return (
     <html lang="es">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} ${specialElite.variable} antialiased bg-black`}
+        className={`${geistSans.variable} ${geistMono.variable} ${specialElite.variable} ${rye.variable} antialiased bg-black`}
       >
         <main className="flex-grow">{children}</main>
 
